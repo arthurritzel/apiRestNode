@@ -74,6 +74,7 @@
         "tags": [
           "Users"
         ],
+        "summary": "List all users",
         "description": "",
         "parameters": [
           {
@@ -127,6 +128,7 @@
         "tags": [
           "Users"
         ],
+        "summary": "Create new user",
         "description": "",
         "parameters": [
           {
@@ -203,6 +205,7 @@
         "tags": [
           "Users"
         ],
+        "summary": "Get user by ID",
         "description": "",
         "parameters": [
           {
@@ -257,6 +260,7 @@
         "tags": [
           "Users"
         ],
+        "summary": "Edit user by ID",
         "description": "",
         "parameters": [
           {
@@ -337,6 +341,7 @@
         "tags": [
           "Users"
         ],
+        "summary": "Delete user by ID",
         "description": "",
         "parameters": [
           {
@@ -798,6 +803,90 @@
                   "example": {
                     "type": "number",
                     "example": 100
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "object"
+          },
+          "required": {
+            "type": "array",
+            "example": [
+              "name",
+              "email",
+              "password"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "minLength": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "maxLength": {
+                    "type": "number",
+                    "example": 100
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "João"
+                  }
+                }
+              },
+              "email": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "minimum": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "example@example.com"
+                  }
+                }
+              },
+              "password": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "minLength": {
+                    "type": "number",
+                    "example": 8
+                  },
+                  "maxLength": {
+                    "type": "number",
+                    "example": 20
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "password123"
                   }
                 }
               }

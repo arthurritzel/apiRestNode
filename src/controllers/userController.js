@@ -29,6 +29,7 @@ export const login = async (req, res, next) => {
 export const showUser = async (req, res, next) => {
   /*
   #swagger.tags = ["Users"]
+  #swagger.summary = "Get user by ID"
   #swagger.responses[200]
   #swagger.security = [{ "BearerAuth": [] }]
   */
@@ -46,6 +47,7 @@ export const showUser = async (req, res, next) => {
 export const listUsers = async (req, res, next) => {
   /*
   #swagger.tags = ["Users"]
+  #swagger.summary = "List all users"
   #swagger.responses[200]
   #swagger.security = [{ "BearerAuth": [] }]
   */
@@ -76,6 +78,7 @@ export const listUsers = async (req, res, next) => {
 export const createUser = async (req, res, next) => {
   /*
   #swagger.tags = ["Users"]
+  #swagger.summary = "Create new user"
   #swagger.security = [{ "BearerAuth": [] }]
    #swagger.requestBody = {
     required: true,
@@ -108,6 +111,7 @@ export const createUser = async (req, res, next) => {
 export const editUser = async (req, res, next) => {
   /*
   #swagger.tags = ["Users"]
+  #swagger.summary = "Edit user by ID"
   #swagger.security = [{ "BearerAuth": [] }]
   #swagger.parameters["body"] = {
     in: "body",
@@ -132,6 +136,7 @@ export const editUser = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   /*
   #swagger.tags = ["Users"]
+  #swagger.summary = "Delete user by ID"
   #swagger.responses[204]
   #swagger.security = [{ "BearerAuth": [] }]
   */

@@ -26,6 +26,15 @@ const doc = {
           category: { type: "string", minLength: 3, maxLength: 50, example: "Electronics" },
           stock: { type: "integer", minimum: 0, example: 100 }
         }
+      },
+      User: {
+        type: "object",
+        required: ["name", "email", "password"],
+        properties: {
+          name: { type: "string", minLength: 2, maxLength: 100, example: "João" },
+          email: { type: "string", minimum: 0, example: "example@example.com" },
+          password: { type: "string", minLength: 8, maxLength: 20, example: "password123" },
+        }
       }
     },
     securitySchemes: {
