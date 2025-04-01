@@ -17,5 +17,9 @@ export default (_, res, next) => {
     .status(httpStatus.INTERNAL_SERVER_ERROR)
     .json(data);
 
+  res.unauthorized = () => res
+    .status(httpStatus.UNAUTHORIZED)
+    .send();
+
   next();
 }

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "swagger": "node src/swagger",
     "start": "node src/server",
     "start:watch": "node --watch src/server"
   },
@@ -18,6 +19,10 @@
     "mongoose": "8.10.1",
     "morgan": "1.10.0",
     "node-boilerplate": "file:",
-    "yup": "1.6.1"
+    "yup": "1.6.1",
+    "swagger-ui-express": "5.0.1"
+  },
+  "devDependencies": {
+    "swagger-autogen": "2.23.7"
   }
 }

@@ -1,6 +1,38 @@
 import User from "../models/userModel.js";
+import { hashPassword } from "../utils/bcrypt.js";
+import bcrypt from "bcrypt";
+
+export const login = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Login"]
+  #swagger.security = [{ "BearerAuth": [] }]
+  */
+  try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      res.unauthorized();
+    }
+
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!isMatch) {
+      res.unauthorized();
+    }
+
+    req.user = user;
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const showUser = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Users"]
+  #swagger.responses[200]
+  #swagger.security = [{ "BearerAuth": [] }]
+  */
+
   try{
     const user = await User.findOne(req.params)
     .select("-password");
@@ -12,6 +44,12 @@ export const showUser = async (req, res, next) => {
 }
 
 export const listUsers = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Users"]
+  #swagger.responses[200]
+  #swagger.security = [{ "BearerAuth": [] }]
+  */
+
   try {
     const page = parseInt(req.query._page) || 1;
     const size = parseInt(req.query._size) || 10;
@@ -36,6 +74,28 @@ export const listUsers = async (req, res, next) => {
 };
 
 export const createUser = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Users"]
+  #swagger.security = [{ "BearerAuth": [] }]
+   #swagger.requestBody = {
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            name: { type: "string" },
+            email: { type: "string", format: "email" },
+            password: { type: "string", format: "password" }
+          },
+          required: ["name", "email", "password"]
+        }
+      }
+    }
+  }
+  #swagger.responses[201]
+  */
+
   try{
     await new User(req.body).save();
 
@@ -46,6 +106,20 @@ export const createUser = async (req, res, next) => {
 }
 
 export const editUser = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Users"]
+  #swagger.security = [{ "BearerAuth": [] }]
+  #swagger.parameters["body"] = {
+    in: "body",
+    schema: {
+      $name: "",
+      $email: "",
+      $password: ""
+    }
+  }
+  #swagger.responses[200]
+  */
+
   try{
     const user = await User.findOneAndUpdate(req.params, req.body, { new: true }).select("-password");
   
@@ -56,6 +130,12 @@ export const editUser = async (req, res, next) => {
 }
 
 export const deleteUser = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Users"]
+  #swagger.responses[204]
+  #swagger.security = [{ "BearerAuth": [] }]
+  */
+
   try{
     await User.findByIdAndDelete(req.params._id);
   

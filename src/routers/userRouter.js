@@ -12,10 +12,10 @@ import {
 } from "../controllers/userController.js";
 
 const router = Router();
-router.get("/", listUsers);
-router.get("/:_id", showUser);
-router.post("/", validator(userValidator), createUser);
-router.put("/:_id", validator(userValidator), editUser);
-router.delete("/:_id", deleteUser);
+router.get("/users/", listUsers);
+router.get("/users/:_id", showUser);
+router.post("/users/", validator(userValidator), createUser);
+router.put("/users/:_id", validator(userValidator), editUser);
+router.delete("/users/:_id", deleteUser);
 
 export default router;

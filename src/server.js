@@ -15,6 +15,6 @@ const listening = () => {
 };
 
 const server = http.createServer(app);
-server.listen(process.env.PORT || 4040);
+server.listen(process.env.PORT || 3000);
 server.on("error", error);
 server.on("listening", listening);
