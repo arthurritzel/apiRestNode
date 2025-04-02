@@ -8,8 +8,9 @@
     "start:watch": "node --watch src/server"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "compression": "~1.8.0",
+    "amqplib": "0.10.7",
+    "bcrypt": "5.1.1",
+    "compression": "1.8.0",
     "cors": "2.8.5",
     "dotenv": "16.4.7",
     "express": "4.21.2",
@@ -19,8 +20,8 @@
     "mongoose": "8.10.1",
     "morgan": "1.10.0",
     "node-boilerplate": "file:",
-    "yup": "1.6.1",
-    "swagger-ui-express": "5.0.1"
+    "swagger-ui-express": "5.0.1",
+    "yup": "1.6.1"
   },
   "devDependencies": {
     "swagger-autogen": "2.23.7"

@@ -9,6 +9,7 @@ import handler from "./middlewares/handler.js";
 import AuthRouter from "./routers/authRouter.js"
 import UserRouter  from "./routers/userRouter.js";
 import ProductRouter from "./routers/productRouter.js";
+import TaskRouter from "./routers/taskRouter.js";
 
 import { verify } from "./controllers/authController.js"
 
@@ -17,8 +18,8 @@ routes.use(hateos);
 routes.use(handler);
 
 routes.use("/login", AuthRouter)
-routes.use("/api", verify, UserRouter)
-routes.use("/api", verify, ProductRouter)
+routes.use("/api/tasks", TaskRouter)
+routes.use("/api", verify, UserRouter, ProductRouter)
 
 routes.use(InternalServerError)
 routes.use(NotFound);

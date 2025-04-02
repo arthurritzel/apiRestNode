@@ -35,7 +35,7 @@ const doc = {
           email: { type: "string", minimum: 0, example: "example@example.com" },
           password: { type: "string", minLength: 8, maxLength: 20, example: "password123" },
         }
-      }
+      }, 
     },
     securitySchemes: {
         BearerAuth: {
