@@ -21,5 +21,9 @@ export default (_, res, next) => {
     .status(httpStatus.UNAUTHORIZED)
     .send();
 
+  res.forbidden = () => res
+    .status(httpStatus.FORBIDDEN)
+    .send();
+
   next();
 }

@@ -1,9 +1,9 @@
 import amqp from 'amqplib';
-
+import { v4 } from 'uuid';
 const exchange = 'processTaskExchange';
 const routingKey = 'task';
 
-export default async (message) => {
+export default async (eventType, data) => {
     let connection;
     try {
         connection = await amqp.connect(process.env.RABBIT_MQ);
@@ -11,9 +11,15 @@ export default async (message) => {
 
         await channel.assertExchange(exchange, 'direct', { durable: true });
 
-        channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(message)), {
-            persistent: true,
-        });
+        channel.publish(exchange, routingKey, Buffer.from(JSON.stringify({
+            eventType,
+            version: "1.0",
+            producer: "api",
+            timestamp: new Date(),
+            correlationId: v4(),
+            data,
+          })));
+      
 
         await channel.close();
     } catch (error) {

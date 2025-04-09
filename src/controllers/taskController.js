@@ -11,7 +11,7 @@ export const getActiveTasks = async (req, res, next) => {
 
   try {
 
-    const tasks = await Task.find({done: false});
+    const tasks = await Task.find({done: false}, "_id description");
 
     res.ok(tasks);
   } catch (err) {
@@ -33,14 +33,14 @@ export const createTasks = async (req, res, next) => {
         done: false,
     }
     ).save();
-    console.log(req.baseUrl)
-     await publish({
-        id: task._id,
-        description: task.description,
-        callback: {
-            href: `${process.env.SERVER}${req.baseUrl}/${task._id}/done`,
-            method: "PATCH",
-        }
+     await publish("TaskCreated", {
+      id: task._id,
+      description: task.description,
+      callback: {
+        href: `${process.env.SERVER}${req.baseUrl}/${task._id}/done`,
+        method: "PATCH",
+        token: task.token,
+      }
     });
 
     res.created();
@@ -57,6 +57,17 @@ export const doneTasks = async (req, res, next) => {
   #swagger.security = [{ "BearerAuth": [] }]
   */
     try {
+        const token = req.header("x-api-key");
+        const task = await Task.findOne({
+            _id: req.params._id,
+            done: false,
+            token: token,
+        });
+
+        if (!task){
+          return res.unauthorized();
+        }
+
         await Task.findByIdAndUpdate(req.params._id, { $set : {done: true }});
 
         res.ok();
