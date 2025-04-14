@@ -10,6 +10,8 @@ import AuthRouter from "./routers/authRouter.js"
 import UserRouter  from "./routers/userRouter.js";
 import ProductRouter from "./routers/productRouter.js";
 import TaskRouter from "./routers/taskRouter.js";
+import OrderRouter from "./routers/orderRouter.js";
+import DebtorRouter from "./routers/debtorRouter.js";
 
 import { verify } from "./controllers/authController.js"
 
@@ -19,6 +21,8 @@ routes.use(handler);
 
 routes.use("/login", AuthRouter)
 routes.use("/api/tasks", TaskRouter)
+routes.use("/api/debtors", DebtorRouter)
+routes.use("/api/orders", OrderRouter)
 routes.use("/api", verify, UserRouter, ProductRouter)
 
 routes.use(InternalServerError)

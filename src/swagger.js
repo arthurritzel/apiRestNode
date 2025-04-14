@@ -36,6 +36,14 @@ const doc = {
           password: { type: "string", minLength: 8, maxLength: 20, example: "password123" },
         }
       }, 
+      Order: {
+        type: "object",
+        required: ["user", "email", "password"],
+        properties: {
+          user: { type: "string", minLength: 2, maxLength: 100, example: "João" },
+          products: { type: "array", minimum: 0, example: "" },
+        }
+      }, 
     },
     securitySchemes: {
         BearerAuth: {

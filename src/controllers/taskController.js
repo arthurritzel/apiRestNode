@@ -33,7 +33,7 @@ export const createTasks = async (req, res, next) => {
         done: false,
     }
     ).save();
-     await publish("TaskCreated", {
+     await publish("task", {
       id: task._id,
       description: task.description,
       callback: {
