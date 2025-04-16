@@ -35,30 +35,103 @@ const doc = {
           email: { type: "string", minimum: 0, example: "example@example.com" },
           password: { type: "string", minLength: 8, maxLength: 20, example: "password123" },
         }
-      }, 
+      },
       Order: {
         type: "object",
-        required: ["user", "email", "password"],
+        required: ["userId", "products"],
         properties: {
-          user: { type: "string", minLength: 2, maxLength: 100, example: "João" },
-          products: { type: "array", minimum: 0, example: "" },
-        }
-      }, 
-    },
-    securitySchemes: {
-        BearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
-          description: "Insira o token JWT"
+          userId: {
+            type: "string",
+            example: "60f6b2fbc25e4e3d5c1a5f92",
+            description: "User ID (MongoDB ObjectId)"
+          },
+          products: {
+            type: "array",
+            minItems: 1,
+            items: {
+              type: "object",
+              required: ["productId", "quantity"],
+              properties: {
+                productId: {
+                  type: "string",
+                  example: "60f6b2fbc25e4e3d5c1a5f93",
+                  description: "Product ID (MongoDB ObjectId)"
+                },
+                quantity: {
+                  type: "integer",
+                  minimum: 1,
+                  example: 2,
+                  description: "Quantity of the product"
+                }
+              }
+            }
+          }
         }
       },
-      security: [
-        {
-          BearerAuth: []
+      Debt: {
+        type: "object",
+        required: ["user", "order", "products", "totalAmount"],
+        properties: {
+          user: {
+            type: "string",
+            example: "60f6b2fbc25e4e3d5c1a5f92",
+            description: "User ID (MongoDB ObjectId)"
+          },
+          order: {
+            type: "string",
+            example: "60f6b2fbc25e4e3d5c1a5f95",
+            description: "Order ID (MongoDB ObjectId)"
+          },
+          products: {
+            type: "array",
+            minItems: 1,
+            items: {
+              type: "object",
+              required: ["productId", "quantity"],
+              properties: {
+                productId: {
+                  type: "string",
+                  example: "60f6b2fbc25e4e3d5c1a5f96",
+                  description: "Product ID (MongoDB ObjectId)"
+                },
+                quantity: {
+                  type: "integer",
+                  minimum: 1,
+                  example: 1,
+                  description: "Quantity of the product"
+                }
+              }
+            }
+          },
+          totalAmount: {
+            type: "number",
+            minimum: 0,
+            example: 199.99,
+            description: "Total amount of the debt"
+          },
+          status: {
+            type: "string",
+            enum: ["pending", "paid", "overdue"],
+            example: "pending",
+            description: "Status of the debt"
+          }
         }
-      ]
-  }
+      }
+    },
+    securitySchemes: {
+      BearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+        description: "Insira o token JWT"
+      }
+    }
+  },
+  security: [
+    {
+      BearerAuth: []
+    }
+  ]
 };
 
 const outputFile = "./config/swagger.json";
